@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   users: any;
-  getUsersUrl: string = 'https://localhost:5001/api/Users';
+  getUsersUrl: string = 'https://localhost:5001/api/users';
   constructor(private http: HttpClient) {}
 
   ngOnInit() {

@@ -1,7 +1,6 @@
-using backend_api.Data;
+using backend_api.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,9 +24,8 @@ namespace backend_api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backend_api", Version = "v1" });
             });
-            services.AddDbContext<DataContext>(options => {
-                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
-            });
+            services.AddApplicationServices(_config);
+            services.AddIdentityServices(_config);
             services.AddCors();
         }
 
@@ -46,6 +44,8 @@ namespace backend_api
             app.UseRouting();
 
             app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
