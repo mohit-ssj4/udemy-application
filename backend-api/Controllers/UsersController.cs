@@ -17,12 +17,14 @@ namespace backend_api.Controllers
             _context = context;
         }
 
+        //Method to return all the users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
+        //Method to return a particular user
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {

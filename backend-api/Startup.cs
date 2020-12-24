@@ -28,6 +28,7 @@ namespace backend_api
             services.AddDbContext<DataContext>(options => {
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +44,8 @@ namespace backend_api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
             app.UseAuthorization();
 

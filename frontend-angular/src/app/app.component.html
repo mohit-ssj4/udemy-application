@@ -1,3 +1,5 @@
 <div class="container">
-  <h1>Hello Mohit!</h1>
+  <ul *ngFor="let user of users">
+    <li>{{user.id}}. {{user.userName | titlecase}}</li>
+  </ul>
 </div>
